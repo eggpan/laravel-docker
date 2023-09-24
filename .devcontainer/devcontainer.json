@@ -1,0 +1,34 @@
+{
+  "name": "laravel",
+  "dockerComposeFile": [
+    "../compose.yml"
+  ],
+  "postCreateCommand": "doas apk add --no-cache bash-completion git",
+  "service": "php",
+  "workspaceFolder": "/laravel",
+  "remoteUser": "user",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.renderWhitespace": "boundary",
+        "editor.renderControlCharacters": true,
+        "github.copilot.enable": {
+          "*": true
+        }
+      },
+      "extensions": [
+        "devsense.phptools-vscode",
+        "eamodio.gitlens",
+        "emallin.phpunit",
+        "editorConfig.editorConfig",
+        "gitHub.copilot",
+        "junstyle.php-cs-fixer",
+        "mhutchie.git-graph",
+        "ms-vsliveshare.vsliveshare",
+        "onecentlin.laravel-blade",
+        "streetsidesoftware.code-spell-checker",
+        "xdebug.php-debug"
+      ]
+    }
+  }
+}

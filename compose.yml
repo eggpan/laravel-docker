@@ -1,0 +1,21 @@
+services:
+  web:
+    build:
+      context: runtimes/web
+    image: laravel-docker:web
+    environment:
+      TZ: "TZ:-UTC"
+    ports:
+      - "80:80"
+    volumes:
+      - ./public/:/var/www/static-data/:ro
+  php:
+    build:
+      args:
+        PHP_VERSION: "8.2"
+      context: runtimes/php
+    environment:
+      TZ: "TZ:-UTC"
+    image: laravel-docker:php
+    volumes:
+      - ./:/laravel/
