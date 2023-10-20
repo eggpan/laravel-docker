@@ -48,33 +48,33 @@ if [[ ! "${PHP_VERSION}" =~ ^7\.4|8\.[0-2]$ ]]; then
   exit 1
 fi
 
+IS_NOT_SUPPORTED=false
 if [[ ! "${LARAVEL_VERSION}" =~ ^[6-9]|10$ ]]; then
-  echo 'Laravel version must be between 6 and 10' >&2
-  exit 1
+  IS_NOT_SUPPORTED=true
 fi
 
 if [[ $LARAVEL_VERSION -eq 10 && "${PHP_VERSION}" =~ ^7\.4|8\.0$ ]]; then
-  echo "Laravel 10 does not support PHP $PHP_VERSION" >&2
-  exit 1
+  IS_NOT_SUPPORTED=true
 fi
 
 if [[ $LARAVEL_VERSION -eq 9 && "${PHP_VERSION}" =~ ^7\.4$ ]]; then
-  echo "Laravel 9 does not support PHP $PHP_VERSION" >&2
-  exit 1
+  IS_NOT_SUPPORTED=true
 fi
 
 if [[ $LARAVEL_VERSION -eq 8 && "${PHP_VERSION}" =~ ^8\.[2-9]$ ]]; then
-  echo "Laravel 8 does not support PHP $PHP_VERSION" >&2
-  exit 1
+  IS_NOT_SUPPORTED=true
 fi
 
 if [[ $LARAVEL_VERSION -eq 7 && "${PHP_VERSION}" =~ ^8\.[1-9]$ ]]; then
-  echo "Laravel 7 does not support PHP $PHP_VERSION" >&2
-  exit 1
+  IS_NOT_SUPPORTED=true
 fi
 
 if [[ $LARAVEL_VERSION -eq 6 && "${PHP_VERSION}" =~ ^8\.[1-9]$ ]]; then
-  echo "Laravel 6 does not support PHP $PHP_VERSION" >&2
+  IS_NOT_SUPPORTED=true
+fi
+
+if "${IS_NOT_SUPPORTED}"; then
+  echo "Laravel $LARAVEL_VERSION does not support PHP $PHP_VERSION" >&2
   exit 1
 fi
 
